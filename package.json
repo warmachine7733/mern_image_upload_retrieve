@@ -1,0 +1,22 @@
+{
+  "name": "dummy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "client":"cd client/src && npm start",
+     "server":"cd server && npm start",
+     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/warmachine7733/mern_image_upload_retrieve.git"
+  },
+  "author": "me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/warmachine7733/mern_image_upload_retrieve/issues"
+  },
+  "homepage": "https://github.com/warmachine7733/mern_image_upload_retrieve#readme"
+}

@@ -4,7 +4,8 @@ const initialState = {
   percentCompleted: 0,
   error: "",
   file: "",
-  images: []
+  images: [],
+  toasterItem: ""
 };
 
 export const content = (state = initialState, action) => {
@@ -29,7 +30,11 @@ export const content = (state = initialState, action) => {
         ...state,
         percentCompleted: action.percentCompleted
       };
-
+    case "SHOW_MESSAGE":
+      return {
+        ...state,
+        toasterItem: "image exists in db"
+      };
     case "STORE_DOWNLOADED_IMAGES":
       return {
         ...state,

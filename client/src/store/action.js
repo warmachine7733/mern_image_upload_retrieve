@@ -31,6 +31,9 @@ export const uploadImage = file => {
         dispatch(getImages());
         dispatch({ type: "CLEAR_FILE" });
       }
+      if (result.status === 201) {
+        dispatch({ type: "SHOW_MESSAGE" });
+      }
     } catch (error) {
       dispatch({ type: "UPLOAD_FAILED", error });
     }
