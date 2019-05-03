@@ -11,6 +11,7 @@ module.exports = {
         img_url
       });
       await newImage.save();
+
       res.status(200).json("file uploaded successfully");
     } catch (err) {
       res.status(500).json(err);
@@ -18,6 +19,11 @@ module.exports = {
   },
   getImages: async (req, res, next) => {
     const result = await Image.find();
+    // const changeStream = await Image.watch();
+    // changeStream.on("change", change => console.log("new file", change));
+    global.io.emit("news", { result });
+
+    // });
     res.status(200).json(result.reverse());
   }
 };

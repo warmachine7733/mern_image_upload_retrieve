@@ -1,4 +1,6 @@
 import axios from "axios";
+const nodeServer = process.env["REACT_APP_NODE_SERVER"];
+console.log(nodeServer);
 
 //handling file on change
 export const handleFileChange = file => {
@@ -24,11 +26,13 @@ export const uploadImage = file => {
       const data = new FormData();
       data.append("image", file);
       const result = file
-        ? await axios.post("http://localhost:4000/upload", data, config())
+        ? await axios.post(`${nodeServer}/upload`, data, config())
         : "";
       if (result.status === 200) {
         dispatch({ type: "IMAGE_UPLOADED" });
         dispatch(getImages());
+        let percentCompleted = 0;
+        dispatch({ type: "PROGRESS", percentCompleted });
         dispatch({ type: "CLEAR_FILE" });
       }
       if (result.status === 201) {
@@ -43,10 +47,16 @@ export const uploadImage = file => {
 //download image
 export const getImages = () => {
   return async dispatch => {
-    const result = await axios.get("http://localhost:4000/getimages");
+    const result = await axios.get(`${nodeServer}/getimages`);
     let images = result.data;
     if (result.status === 200) {
-      dispatch({ type: "STORE_DOWNLOADED_IMAGES", images });
+      dispatch(socketCall(images));
     }
+  };
+};
+export const socketCall = images => {
+  return {
+    type: "STORE_DOWNLOADED_IMAGES",
+    images
   };
 };

@@ -1,16 +1,16 @@
 import React from "react";
 import { Provider } from "react-redux";
 import store from "./store/store";
-import FileUpload from "./components/fileUpload";
-import Images from "./components/getImages";
+import Container from "./components/index";
 
-const App = () => {
-  return (
-    <Provider store={store}>
-      <FileUpload />
-      <Images />
-    </Provider>
-  );
-};
+class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <Container />
+      </Provider>
+    );
+  }
+}
 
 export default App;

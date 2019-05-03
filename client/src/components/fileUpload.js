@@ -1,10 +1,13 @@
 import React from "react";
-import { connect } from "react-redux";
-import { handleFileChange, uploadImage } from "../store/action";
 
 const FileUpload = props => {
-  const { handleFileChange, uploadImage, file, toasterItem } = props;
-  console.log("...file", props);
+  const {
+    handleFileChange,
+    uploadImage,
+    file,
+    toasterItem,
+    percentCompleted
+  } = props;
   return (
     <div>
       <input
@@ -14,23 +17,13 @@ const FileUpload = props => {
       />
       <button onClick={() => uploadImage(file)}>upload</button>
       {toasterItem ? <div>{toasterItem}</div> : ""}
+      {percentCompleted === 0 ? (
+        ""
+      ) : (
+        <progress min={0} max={100} value={percentCompleted} />
+      )}
     </div>
   );
 };
-const mapStateToProps = state => {
-  return {
-    file: state.content.file,
-    toasterItem: state.content.toasterItem
-  };
-};
-const mapDispatchToProps = dispatch => {
-  return {
-    handleFileChange: file => dispatch(handleFileChange(file)),
-    uploadImage: file => dispatch(uploadImage(file))
-  };
-};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(FileUpload);
+export default FileUpload;
